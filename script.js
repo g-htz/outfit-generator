@@ -6,8 +6,20 @@ function loginWithGoogle() {
 
 // Function to handle photo upload
 function uploadPhoto() {
-    // Implement photo upload logic here
-    // Store uploaded photo in the gallery section
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = function(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function() {
+            var img = document.createElement('img');
+            img.src = reader.result;
+            document.getElementById('gallery').appendChild(img);
+        }
+        reader.readAsDataURL(file);
+    }
+    input.click();
 }
 
 // Function to display selected outfit
@@ -18,8 +30,8 @@ function selectOutfit(category) {
 // Event listener for login button
 document.getElementById('loginBtn').addEventListener('click', loginWithGoogle);
 
-// Event listener for photo upload button (not shown in code, you can add a button in HTML)
-// document.getElementById('uploadBtn').addEventListener('click', uploadPhoto);
+// Event listener for photo upload button
+document.getElementById('uploadBtn').addEventListener('click', uploadPhoto);
 
 // Event listener for category buttons
 document.querySelectorAll('.categoryBtn').forEach(function(btn) {
