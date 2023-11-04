@@ -22,9 +22,29 @@ function uploadPhoto() {
     input.click();
 }
 
-// Function to display selected outfit
 function selectOutfit(category) {
-    // Implement logic to select outfit based on category
+    var gallery = document.getElementById('gallery');
+    var outfitSection = document.getElementById('outfit');
+    
+    // Clear the outfit section
+    outfitSection.innerHTML = '';
+
+    // Get all images from the gallery
+    var images = gallery.getElementsByTagName('img');
+
+    // Filter images based on category
+    var categoryImages = [];
+    for (var i = 0; i < images.length; i++) {
+        var img = images[i];
+        if (img.dataset.category === category) {
+            categoryImages.push(img.cloneNode(true));
+        }
+    }
+
+    // Display selected outfit images
+    categoryImages.forEach(function(img) {
+        outfitSection.appendChild(img);
+    });
 }
 
 // Event listener for login button
